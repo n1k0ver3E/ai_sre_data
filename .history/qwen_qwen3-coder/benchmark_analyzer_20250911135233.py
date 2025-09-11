@@ -66,6 +66,7 @@ def analyze_json_files(input_dir, is_supervisor_enabled):
                 result['success'] = results_data.get('success', False)
             elif 'Detection Accuracy' in results_data:
                 if is_supervisor_enabled:
+                    print(result['supervisor_result'], result['supervisor_result'] == 'Correct')
                     result['success'] = results_data.get('Detection Accuracy') == 'Correct' and result['supervisor_result'] == 'Correct'
                 else:
                     result['success'] = results_data.get('Detection Accuracy') == 'Correct'

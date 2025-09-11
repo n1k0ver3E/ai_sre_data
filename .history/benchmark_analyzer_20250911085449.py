@@ -28,7 +28,7 @@ def extract_task_type(problem_id):
 
     return 'unknown'
 
-def analyze_json_files(input_dir, is_supervisor_enabled):
+def analyze_json_files(input_dir):
     """Analyze all JSON files in the input directory and return detailed results"""
     results = []
     json_dir = Path(input_dir)
@@ -42,6 +42,7 @@ def analyze_json_files(input_dir, is_supervisor_enabled):
         try:
             with open(json_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
+            
             # Extract key information
             result = {
                 'filename': json_file.name,
@@ -55,7 +56,7 @@ def analyze_json_files(input_dir, is_supervisor_enabled):
                 'end_time': data.get('end_time', None),
                 'duration': None,
                 'steps': data.get('results', {}).get('steps', None),
-                'supervisor_result': data.get('results', {}).get('supervisor_result', None),
+                'supervisor_result': data.get('supervisor_result', None),
             }
             
             # Handle different success indicators (reference enhanced_analysis logic)
@@ -65,10 +66,7 @@ def analyze_json_files(input_dir, is_supervisor_enabled):
             if 'success' in results_data:
                 result['success'] = results_data.get('success', False)
             elif 'Detection Accuracy' in results_data:
-                if is_supervisor_enabled:
-                    result['success'] = results_data.get('Detection Accuracy') == 'Correct' and result['supervisor_result'] == 'Correct'
-                else:
-                    result['success'] = results_data.get('Detection Accuracy') == 'Correct'
+                result['success'] = results_data.get('Detection Accuracy') == 'Correct' and results_data.get('Detection Accuracy') == 'Correct'
             elif 'Localization Accuracy' in results_data:
                 result['success'] = results_data.get('Localization Accuracy') == 'Correct'
             elif 'Analysis Accuracy' in results_data:
@@ -222,7 +220,6 @@ def main():
                        help='Output directory for CSV reports (default: current directory)')
     parser.add_argument('--quiet', '-q', action='store_true',
                        help='Suppress console summary output')
-    parser.add_argument('--supervisor', '-s', help="filter result by supervisor_result", default=True)
     
     args = parser.parse_args()
     
@@ -235,7 +232,7 @@ def main():
     print(f"Output directory: {args.output_dir}")
     
     # Analyze JSON files
-    results = analyze_json_files(args.input_dir, args.supervisor)
+    results = analyze_json_files(args.input_dir)
     
     if not results:
         print("No valid JSON files found to analyze.")
