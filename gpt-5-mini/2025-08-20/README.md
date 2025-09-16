@@ -1,8 +1,13 @@
 Analyzing JSON files in: ./gpt-5-mini/2025-08-20
+
 Output directory: ./gpt-5-mini/2025-08-20
+
 Found 88 JSON files to analyze...
+
 Detailed results written to gpt-5-mini/2025-08-20/detailed_results_20250916_113620.csv
+
 Observation results written to gpt-5-mini/2025-08-20/observation_results_20250916_113620.csv
+
 
 ## BENCHMARK ANALYSIS SUMMARY
 
