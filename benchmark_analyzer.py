@@ -108,7 +108,7 @@ def generate_detailed_csv(results, output_dir):
     df = pd.DataFrame(results)
     df.to_csv(detailed_csv, index=False)
     
-    print(f"Detailed results written to {detailed_csv}")
+    print(f"Detailed results written to {detailed_csv}\n")
     return df, detailed_csv
 
 
@@ -171,7 +171,7 @@ def generate_observation_csv(df, output_dir):
     observation_df = pd.DataFrame(observation_results)
     observation_df.to_csv(observation_csv, index=False)
     
-    print(f"Observation results written to {observation_csv}")
+    print(f"Observation results written to {observation_csv}\n")
     return observation_df, observation_csv
 
 def convert_timestamp_to_utc(timestamp):
@@ -187,9 +187,7 @@ def convert_timestamp_to_utc(timestamp):
 
 def print_summary_stats(df):
     """Print summary statistics to console"""
-    print("\n" + "="*80)
-    print("BENCHMARK ANALYSIS SUMMARY")
-    print("="*80)
+    print("## BENCHMARK ANALYSIS SUMMARY")
     
     # Overall statistics
     total_tasks = len(df)
@@ -197,19 +195,19 @@ def print_summary_stats(df):
     failed_tasks = len(df[df['success'] == False])
     unknown_tasks = len(df[df['success'].isna()])
     
-    print(f"\nOVERALL STATISTICS:")
-    print(f"Total Tasks: {total_tasks}")
-    print(f"Successful Tasks: {successful_tasks} ({successful_tasks/total_tasks*100:.1f}%)")
-    print(f"Failed Tasks: {failed_tasks} ({failed_tasks/total_tasks*100:.1f}%)")
-    print(f"Unknown Status: {unknown_tasks} ({unknown_tasks/total_tasks*100:.1f}%)")
+    print(f"\n**OVERALL STATISTICS:**")
+    print(f"- Total Tasks: {total_tasks}")
+    print(f"- Successful Tasks: {successful_tasks} ({successful_tasks/total_tasks*100:.1f}%)")
+    print(f"- Failed Tasks: {failed_tasks} ({failed_tasks/total_tasks*100:.1f}%)")
+    print(f"- Unknown Status: {unknown_tasks} ({unknown_tasks/total_tasks*100:.1f}%)")
     
     # Task type distribution
-    print(f"\nTASK TYPE DISTRIBUTION:")
+    print(f"\n**TASK TYPE DISTRIBUTION:**")
     task_counts = df['task_type'].value_counts()
     for task_type, count in task_counts.items():
         task_success = len(df[(df['task_type'] == task_type) & (df['success'] == True)])
         task_success_rate = (task_success / count * 100) if count > 0 else 0
-        print(f"{task_type.capitalize()}: {count} tasks, {task_success_rate:.1f}% success rate")
+        print(f"- {task_type.capitalize()}: {count} tasks, {task_success_rate:.1f}% success rate")
 
 
 def main():
@@ -231,8 +229,8 @@ def main():
         print(f"Error: Input directory '{args.input_dir}' not found.")
         return 1
     
-    print(f"Analyzing JSON files in: {args.input_dir}")
-    print(f"Output directory: {args.output_dir}")
+    print(f"Analyzing JSON files in: {args.input_dir}\n")
+    print(f"Output directory: {args.output_dir}\n")
     
     # Analyze JSON files
     results = analyze_json_files(args.input_dir, args.supervisor)
@@ -250,10 +248,8 @@ def main():
     # Print summary unless quiet mode
     if not args.quiet:
         print_summary_stats(df)
-    
-    print(f"\n" + "="*80)
-    print("GENERATED FILES:")
-    print("="*80)
+
+    print("## GENERATED FILES:")
     print(f"1. Detailed Results: {detailed_csv_path}")
     print(f"2. Observation Results: {observation_csv_path}")
     print(f"\nAnalysis complete!")

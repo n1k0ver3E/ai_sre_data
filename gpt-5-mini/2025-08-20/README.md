@@ -8,7 +8,6 @@ Detailed results written to gpt-5-mini/2025-08-20/detailed_results_20250916_1136
 
 Observation results written to gpt-5-mini/2025-08-20/observation_results_20250916_113620.csv
 
-
 ## BENCHMARK ANALYSIS SUMMARY
 
 **OVERALL STATISTICS:**
@@ -22,7 +21,6 @@ Observation results written to gpt-5-mini/2025-08-20/observation_results_2025091
 - Localization: 28 tasks, 39.3% success rate
 - Mitigation: 13 tasks, 76.9% success rate
 - Analysis: 13 tasks, 23.1% success rate
-
 
 ## GENERATED FILES:
 1. Detailed Results: gpt-5-mini/2025-08-20/detailed_results_20250916_113620.csv
