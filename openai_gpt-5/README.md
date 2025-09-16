@@ -17,10 +17,10 @@ Observation results written to /Users/niko/Projects/冲ICLR/ai_sre_data/observat
 - Unknown Status: 0 (0.0%)
 
 **TASK TYPE DISTRIBUTION:**
-Detection: 33 tasks, 66.7% success rate
-Localization: 28 tasks, 39.3% success rate
-Mitigation: 13 tasks, 100.0% success rate
-Analysis: 13 tasks, 7.7% success rate
+- Detection: 33 tasks, 66.7% success rate
+- Localization: 28 tasks, 39.3% success rate
+- Mitigation: 13 tasks, 100.0% success rate
+- Analysis: 13 tasks, 7.7% success rate
 
 ## GENERATED FILES:
 1. Detailed Results: /Users/niko/Projects/冲ICLR/ai_sre_data/detailed_results_20250916_113107.csv
